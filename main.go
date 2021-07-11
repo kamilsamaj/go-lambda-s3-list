@@ -10,7 +10,6 @@ import (
 )
 
 func handleRequest(ctx context.Context, event events.SQSEvent) (err error) {
-	log.Printf("Event: %s", event)
 	// indent the JSON event for easy reading
 	eventJson, err := json.MarshalIndent(event, "", "  ")
 	if err != nil {
@@ -18,6 +17,7 @@ func handleRequest(ctx context.Context, event events.SQSEvent) (err error) {
 	}
 	log.Printf("Event: %s", eventJson)
 	// print all environment variables
+	log.Println("ALL ENV Variables:")
 	for _, envVar := range os.Environ() {
 		log.Println(envVar)
 	}

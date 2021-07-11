@@ -8,3 +8,8 @@ Simple Lambda function written in Go using AWS SDK v2.
 ```shell
 make invoke
 ```
+
+# Deploy to AWS
+```shell
+make deploy
+```
