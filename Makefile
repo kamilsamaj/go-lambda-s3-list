@@ -12,7 +12,7 @@ build:
 	go build main.go
 
 invoke: build
-	sam local generate-event sqs receive-message | sam local invoke LambdaFunction --event -
+	sam local generate-event cloudwatch scheduled-event | AWS_REGION=us-east-1 sam local invoke LambdaFunction --event -
 
 deploy: build
 	sam package \
@@ -25,7 +25,7 @@ deploy: build
 		--stack-name $(STACK_NAME) \
 		--capabilities CAPABILITY_IAM \
 		--no-fail-on-empty-changeset \
-		--confirm-changeset
+		--no-confirm-changeset
 
 undeploy:
 	aws cloudformation delete-stack --stack-name $(STACK_NAME)
